@@ -1,0 +1,45 @@
+<div x-data="{ openMenu : false }" :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
+
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+
+  <header class="flex justify-between items-center bg-white drop-shadow-sm py-4 px-8">
+
+    <!-- Logo -->
+    <a href="/" class="text-lg font-bold">Logo</a>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="flex md:hidden flex-col items-center align-middle" @click="openMenu = !openMenu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <span class="text-xs">Menu</span>
+    </button>
+
+    <!-- Main Navigations -->
+    <%= render "navigations/main_menu" %>
+
+  </header>
+    <div x-data="{ isOpen: false }" class="absolute antialiased min-h-screen lg:flex" @keydown.escape.window="isOpen = false">
+      <%= render "navigations/sidebar" %>
+    </div>
+
+  <!-- Pop Out Navigation -->
+  <nav class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-50" :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+
+    <!-- UL Links -->
+    <%= render "navigations/mobile_menu" %>
+
+    <!-- Close Button -->
+    <button class="absolute top-0 right-0 bottom-0 left-0" @click="openMenu = !openMenu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-2 left-2" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+  </nav>
+</div>
