@@ -1,9 +1,11 @@
+<%= provide :sidebar do %> 
   <!-- Sidebar -->
+  <div class="flex-shrink-0 flex flex-col h-full top-0">
   <nav
-    class="absolute transform transition duration-300 inset-0 lg:relative z-10 w-80 bg-gray-100 text-gray-700 h-full p-4"
-    :class="{'-translate-x-full opacity-0':isOpen === false, 'translate-x-0 opacity-100': isOpen === true}"
+    class="fixed transform transition duration-300 inset-0 z-10 w-80 h-full bg-gray-100 text-gray-700 p-4"
+    :class="{'-translate-x-full opacity-0':isOpen === false, 'translate-x-0 opacity-100 h-full': isOpen === true}"
   >
-    <div class="flex justify-between">
+    <div class="flex justify-between mt-24">
       <span class="font-bold text-2xl sm:text-3xl">Sidebar</span>
       <button class="p-2 rounded hover:bg-gray-300" @click="isOpen = false">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -14,10 +16,5 @@
 		<!-- Navigation buttons here -->
 		<%= render 'navigations/sidebar_menu' %>
   </nav>
-  <div class="fixed w-full top-20">
-    <button class="absolute p-2 rounded hover:bg-gray-200" @click="isOpen = true">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-      </svg>
-		</button>
   </div>
+<% end %>

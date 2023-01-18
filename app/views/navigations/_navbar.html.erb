@@ -1,4 +1,6 @@
-<div x-data="{ openMenu : false }" :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
+<% sidebar_at %>
+<%= provide :navbar do %>
+<div x-data="{ openMenu : false, isOpen : false }" :class="openMenu ? 'overflow-hidden' : 'overflow-visible' " @keydown.escape.window="isOpen = false">
 
   <style>
     [x-cloak] {
@@ -6,7 +8,7 @@
     }
   </style>
 
-  <header class="flex justify-between items-center bg-white drop-shadow-sm py-4 px-8">
+  <header class="flex justify-between items-center fixed w-full top-0 z-20 bg-white drop-shadow-sm py-4 px-8">
 
     <!-- Logo -->
     <a href="/" class="text-lg font-bold">Logo</a>
@@ -21,12 +23,9 @@
 
     <!-- Main Navigations -->
     <%= render "navigations/main_menu" %>
-
+  
   </header>
-    <div x-data="{ isOpen: false }" class="absolute antialiased min-h-screen lg:flex" @keydown.escape.window="isOpen = false">
-      <%= render "navigations/sidebar" %>
-    </div>
-
+    <%= yield :sidebar %>
   <!-- Pop Out Navigation -->
   <nav class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-50" :class="openMenu ? 'visible' : 'invisible' " x-cloak>
 
@@ -43,3 +42,4 @@
 
   </nav>
 </div>
+<% end %>
