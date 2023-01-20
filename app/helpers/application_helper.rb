@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+    include Pagy::Frontend
+
     def navbar_at()
         render partial: "navigations/navbar"
     end

@@ -1,27 +1,18 @@
-<ul class="mt-4 flex flex-col space-y-2">
-  <li
-    class="hover:bg-blue-400 rounded p-2 text-lg cursor-pointer transition duration-200"
-  >
-    <a href="#">Home</a>
-  </li>
-  <li
-    class="hover:bg-blue-400 rounded p-2 text-lg cursor-pointer transition duration-200"
-  >
-    <a href="#">About</a>
-  </li>
-  <li
-    class="hover:bg-blue-400 rounded p-2 text-lg cursor-pointer transition duration-200"
-  >
-    <a href="#">Products</a>
-  </li>
-  <li
-    class="hover:bg-blue-400 rounded p-2 text-lg cursor-pointer transition duration-200"
-  >
-    <a href="#">Pricing</a>
-  </li>
-  <li
-    class="hover:bg-blue-400 rounded p-2 text-lg cursor-pointer transition duration-200"
-  >
-    <a href="#">Contact</a>
-  </li>
+<ul class="mt-4 flex flex-wrap w-full space-y-2">
+  <% Category.all.each do |category|%>
+    <li x-data="{selected:null}" class="relative w-full rounded-lg text-white bg-white/60">
+      <button type="button" @click="selected !== 1 ? selected = 1 : selected = null" class="w-full px-8 py-6 text-left">
+        <div class="flex items-center justify-between">
+          <span class="text-[15px] ml-4 text-gray-700 font-bold"><%= category.title %></span>
+        </div>
+      </button>
+      <div class="relative overflow-hidden transition-all max-h-0 duration-700 text-left text-sm mt-2 w-4/5 mx-auto text-gray-700 font-bold" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+        <div class="p-6">
+          <% category.subcategories.each do |subcategory| %>    
+            <%= link_to subcategory.title, subcategory_path(subcategory), class:"flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap mb-2 ease-in-out p-2 bg-gray-200 border hover:border-blue-400 rounded-md mt-1  bg-white/50 transform transition duration-500 hover:scale-110" %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
 </ul>
