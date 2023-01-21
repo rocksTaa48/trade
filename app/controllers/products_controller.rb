@@ -13,8 +13,6 @@ class ProductsController < ApplicationController
 		
 		def show
 			@product = Product.find_by id: params[:id]
-			@subcategory = @product.subcategory
-			@category = @subcategory.category
 		end
 
 		def create
