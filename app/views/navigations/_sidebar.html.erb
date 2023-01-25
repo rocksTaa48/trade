@@ -2,12 +2,12 @@
   <!-- Sidebar -->
   <div class="relative flex-shrink-0 flex flex-col h-full top-0">
   <nav
-    class="fixed transform transition duration-300 inset-0 z-10 w-80 overflow-scroll backdrop-blur-md bg-black/30 text-gray-800 p-4"
+    class="fixed transform transition duration-300 inset-0 z-10 w-80 overflow-scroll backdrop-blur-md bg-gradient-to-l from-indigo-300/60 to-purple-500/80 text-gray-800  p-4"
     :class="{'-translate-x-full opacity-0':isOpen === false, 'translate-x-0 opacity-100': isOpen === true}"
   >
     <div class="flex justify-between mt-24">
-      <span class="font-bold text-2xl sm:text-3xl">Sidebar</span>
-      <button class="p-2 rounded hover:bg-gray-300 transform transition duration-500 hover:scale-110" @click="isOpen = false">
+      <span class="text-gray-200 font-bold text-2xl sm:text-3xl">Sidebar</span>
+      <button class="p-2 rounded hover:bg-[#2D00F7]/50 transform transition duration-500 hover:scale-110" @click="isOpen = false">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
@@ -17,5 +17,10 @@
 		<%= render 'navigations/sidebar_menu' %>
     <!-- Navigation buttons section end -->
   </nav>
+    <button class="top-28 fixed rounded-r-xl bg-gray-600 hover:bg-[#2D00F7]/60 transform transition duration-500 hover:scale-125" @click="isOpen = true" :class="isOpen ? 'invisible' : 'visible'  " x-cloak>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
   </div>
 <% end %>
