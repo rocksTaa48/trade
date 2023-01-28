@@ -72,6 +72,13 @@
         <div class="flex">
           <span class="title-font font-medium text-2xl text-gray-900">$ <%= @product.price %> </span>
           <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded transition duration-300 transform hover:scale-105">Buy it Now!</button>
+          
+             <%= form_with(url: cart_add_path) do |f| %>
+      <%= f.hidden_field :id, value: @product.id %>
+      <%= f.number_field :quantity, value: 1, min: 1 %>
+      <%= f.submit "Add To Cart" %>
+    <% end %>
+          
           <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 transition duration-300 transform hover:scale-110">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path d="M10 21.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.305-15l-3.432 12h-10.428l-3.777-9h-2.168l4.615 11h13.239l3.474-12h1.929l.743-2h-4.195zm-13.805-4c6.712 1.617 7 9 7 9h2l-4 4-4-4h2s.94-6.42-3-9z"/>
