@@ -1,6 +1,8 @@
 class CartController < ApplicationController
 
   def show
+    @product = Product.find_by(id: params[:id])
+    @orders = Order.find_by id: params[:id]
     @render_cart = false
   end
 

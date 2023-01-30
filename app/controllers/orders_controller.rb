@@ -8,9 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-
     current_order.remove_item(id: params[:id])
-
   end
 
 end

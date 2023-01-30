@@ -1,0 +1,46 @@
+<tbody class="bg-white">
+<% current_user.cart.orders.each do |order| %>
+<% product = order.product %>
+   <tr>
+      <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+         <%= product.title %>
+      </td>
+      <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+          <%= form_with(url: cart_add_path) do |f| %>
+						<button class="text-gray-700 p-0 pnumber-minus rounded-full w-7 h-7 transition ease-in-out bg-gray-200 hover:bg-gray-300 hover:scale-110 duration-300" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">
+							-
+						</button>
+						<%= f.number_field :quantity, 
+							value: order.quantity, 
+							min: 1, max: if product.quantity < 10 
+															product.quantity 
+															else
+															10
+															end,
+															type:"number",
+															class:"form-control ml-3 mr-3 inline-block px-6 w-[64px] py-2.5 bg-gray-200 text-gray-700 font-medium text-sm leading-tight text-center uppercase rounded-full shadow-md" 
+						%>
+						<button class="text-gray-700 p-0 number-plus rounded-full w-7 h-7 transition ease-in-out bg-gray-200 hover:bg-gray-300 hover:scale-110 duration-300 mr-4" type="button" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.onchange();">
+							+
+						</button>
+						<%= f.hidden_field :id, value: product.id %>
+						<%= f.submit "Confirm", class:"inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-100 ease-in-out" %>
+          <% end %>
+      </td>
+      <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+				<div class="justify-center inline-flex">
+						<strong>Total:</strong>
+						<p class="px-4">$ <%= order.subtotal %> </p>
+				</div>
+      </td>
+			<td class="p-4 whitespace-nowrap text-sm font-semibold text-center text-gray-900">
+				<%= form_with(url: cart_remove_path) do |f| %>
+					<%= f.hidden_field :id, value: order.id %>
+					<%= f.button :submit do %>
+						<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M9 3h6v-1.75c0-.066-.026-.13-.073-.177-.047-.047-.111-.073-.177-.073h-5.5c-.066 0-.13.026-.177.073-.047.047-.073.111-.073.177v1.75zm11 1h-16v18c0 .552.448 1 1 1h14c.552 0 1-.448 1-1v-18zm-10 3.5c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm5 0c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm8-4.5v1h-2v18c0 1.105-.895 2-2 2h-14c-1.105 0-2-.895-2-2v-18h-2v-1h7v-2c0-.552.448-1 1-1h6c.552 0 1 .448 1 1v2h7z"/></svg>
+					<% end %>
+				<% end %>
+			</td>
+   </tr>
+<% end %>
+</tbody>

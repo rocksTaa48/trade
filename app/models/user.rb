@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
     has_one :cart, dependent: :destroy
+    has_many :products
     
     def current_cart
       if self.cart.nil?
