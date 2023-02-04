@@ -7,7 +7,11 @@ require 'faker'
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: "qwerty",
-    password_confirmation: "qwerty"
+    password_confirmation: "qwerty",
+    phone: Faker::PhoneNumber.cell_phone,
+    city: Faker::Address.city,
+    zip_code: Faker::Address.zip_code,
+    country: Faker::Address.country,
   )
 end
 
@@ -27,7 +31,7 @@ end
   )
 end
 
-(1..200).each do |id|
+(1..300).each do |id|
   Product.create!(
     id: id,
     body: Faker::Lorem.sentence(word_count: 30),

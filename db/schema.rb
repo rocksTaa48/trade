@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_194100) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_133206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_194100) do
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "body"
+    t.string "stars", default: [], array: true
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "subcategories", force: :cascade do |t|
     t.string "title", null: false
     t.string "body"
@@ -72,8 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_194100) do
     t.string "phone"
     t.string "reset_password_token"
     t.string "img_url"
-    t.boolean "admin", default: false
-    t.boolean "seller", default: false
     t.string "country"
     t.string "city"
     t.string "zip_code"
@@ -88,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_194100) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -98,5 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_194100) do
   add_foreign_key "orders", "products"
   add_foreign_key "products", "subcategories"
   add_foreign_key "products", "users"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
   add_foreign_key "subcategories", "categories"
 end

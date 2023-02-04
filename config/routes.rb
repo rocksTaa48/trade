@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
   
   resources :users, only: %i[show], param: :id
-
+  
+  resources :admins, only: %i[show], param: :id
+  
   resources :categories
 
   resources :subcategories

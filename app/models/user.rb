@@ -3,17 +3,25 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  enum role:[:buyer, :seller, :admin]
 
-    has_one :cart, dependent: :destroy
-    has_many :products
-    
-    def current_cart
-      if self.cart.nil?
-      self.create_cart(user_id: self.id)
-      end
-      self.cart
-     end
+  after_initialize :set_default_role, :if => :new_record?
 
-    #validates :email, :user_id, presence: true
+  def set_default_role
+    self.role ||= :user
+  end
+
+  has_one :cart, dependent: :destroy
+  has_many :products
+  
+  def current_cart
+    if self.cart.nil?
+    self.create_cart(user_id: self.id)
+    end
+    self.cart
+   end
+
+  #validates :email, :user_id, presence: true
          
 end

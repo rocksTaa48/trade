@@ -9,8 +9,7 @@ class CategoriesController < ApplicationController
   end
   
   def show
-    @category = Category.find_by id: params[:id]
-    @subcats = Subcat.where(category_id: params[:category_id])
+
   end
 
   def create
